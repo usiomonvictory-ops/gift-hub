@@ -20,7 +20,7 @@ module.exports = async function handler(req, res) {
 
     if (!apiKey) {
       return res.status(500).json({
-        error: "AI service is not configured yet."
+        error: "AI service is not configured."
       });
     }
 
@@ -48,7 +48,7 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    const response = await fetch(
+    const groqResponse = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
       {
         method: "POST",
@@ -61,7 +61,7 @@ module.exports = async function handler(req, res) {
           messages: [
             {
               role: "system",
-              content: "You are USSY AI, a helpful, intelligent and friendly AI assistant. Answer questions clearly and accurately. Explain difficult subjects simply. Help with education, programming, business, writing, mathematics and everyday questions. Be honest when you are uncertain."
+              content: "You are USSY AI, a highly capable, friendly and intelligent AI assistant. Answer questions across education, science, technology, programming, business, mathematics, writing, relationships and everyday life. Explain difficult topics in simple language. Provide detailed answers when useful. Be honest if you do not know something. Never pretend to have performed actions you have not performed."
             },
             ...cleanMessages
           ],
@@ -71,18 +71,20 @@ module.exports = async function handler(req, res) {
       }
     );
 
-    const data = await response.json();
+    const data = await groqResponse.json();
 
-    if (!response.ok) {
-      console.error("Groq API error:", data);
+    if (!groqResponse.ok) {
+      console.error("Groq error:", data);
 
-      return res.status(response.status).json({
-        error: data.error?.message || "The AI service could not respond."
+      return res.status(groqResponse.status).json({
+        error: data.error?.message || "The AI service encountered an error."
       });
     }
 
+    const reply = data.choices?.[0]?.message?.content;
+
     return res.status(200).json({
-      reply: data.choices?.[0]?.message?.content || "I couldn't generate a response."
+      reply: reply || "Sorry, I couldn't generate a response."
     });
 
   } catch (error) {
