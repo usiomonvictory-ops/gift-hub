@@ -1,126 +1,543 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vicky AI - Ask Me Anything</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
-body{background:#0F0F1A;color:#fff;min-height:100vh}
-header{background:#1A1A2E;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
-.logo{font-size:24px;font-weight:900}
-.logo span{color:#A78BFA}
-.nav-btn{background:#A78BFA;color:#000;padding:9px 16px;border-radius:20px;font-weight:800;font-size:13px;border:none;cursor:pointer}
-.hero{text-align:center;padding:32px 20px 16px}
-.hero h1{font-size:40px;line-height:1.1}
-.hero h1 span{color:#A78BFA}
-.hero p{color:#aaa;margin:12px auto;max-width:650px;line-height:1.6}
-.tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0;padding:0 12px}
-.tool-btn{background:#1A1A2E;border:1px solid #333;color:#fff;padding:10px 16px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:700}
-.tool-btn.active{background:#A78BFA;color:#000}
-.chat-box{max-width:820px;margin:0 auto;padding:0 16px 20px}
-.messages{background:#1A1A2E;border-radius:18px;padding:18px;min-height:380px;max-height:500px;overflow-y:auto}
-.msg{margin-bottom:14px;padding:12px 16px;border-radius:14px;line-height:1.65;font-size:15px;white-space:pre-wrap;word-break:break-word}
-.msg.ai{background:#2D2D44;border-left:4px solid #A78BFA}
-.msg.user{background:#A78BFA;color:#000;margin-left:40px;font-weight:600}
-.msg.typing{opacity:.7;font-style:italic}
-.input-row{display:flex;gap:10px;margin-top:14px}
-.input-row input{flex:1;padding:15px;border-radius:12px;border:none;outline:none;background:#fff;color:#000;font-size:15px}
-.input-row button{background:#A78BFA;border:none;padding:0 22px;border-radius:12px;font-weight:900;cursor:pointer;font-size:16px}
-.examples{max-width:820px;margin:0 auto;padding:0 16px 28px}
-.examples h3{margin-bottom:12px}
-.ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.ex-card{background:#1A1A2E;padding:14px;border-radius:12px;cursor:pointer;font-size:14px;line-height:1.5}
-.ex-card:hover{border:1px solid #A78BFA}
-.ex-card b{color:#A78BFA}
-footer{text-align:center;padding:22px;color:#777;font-size:13px}
-.socials{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
-.socials a{background:#fff;color:#000;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:700;text-decoration:none}
-@media(max-width:600px){.hero h1{font-size:30px}.ex-grid{grid-template-columns:1fr}.msg.user{margin-left:10px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USSY AI - Ask Me Anything</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0F0F1A;
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #1A1A2E;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #30304a;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: bold;
+      color: #A78BFA;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
+
+    .new-chat {
+      background: #A78BFA;
+      color: #0F0F1A;
+      padding: 11px 17px;
+      border-radius: 9px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 950px;
+      margin: 45px auto;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .hero h1 span {
+      color: #A78BFA;
+    }
+
+    .hero p {
+      color: #b7b7c9;
+      line-height: 1.6;
+    }
+
+    .tools {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 25px 0;
+    }
+
+    .tool-btn {
+      background: #1A1A2E;
+      color: #ddd;
+      border: 1px solid #383852;
+      padding: 10px 16px;
+      border-radius: 20px;
+    }
+
+    .tool-btn.active {
+      background: #A78BFA;
+      color: #111;
+      border-color: #A78BFA;
+    }
+
+    .chat-box {
+      background: #1A1A2E;
+      border: 1px solid #30304a;
+      border-radius: 15px;
+      padding: 20px;
+      min-height: 320px;
+      max-height: 450px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+    }
+
+    .message {
+      margin-bottom: 17px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .message strong {
+      color: #A78BFA;
+      font-size: 13px;
+    }
+
+    .message p {
+      background: #292943;
+      padding: 13px;
+      border-radius: 10px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .message.user {
+      align-items: flex-end;
+    }
+
+    .message.user strong {
+      color: #6EE7B7;
+    }
+
+    .message.user p {
+      background: #39305b;
+      max-width: 85%;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+    }
+
+    .input-area input {
+      flex: 1;
+      min-width: 0;
+      padding: 15px;
+      border: 1px solid #383852;
+      border-radius: 10px;
+      background: #1A1A2E;
+      color: white;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .input-area input:focus {
+      border-color: #A78BFA;
+    }
+
+    .send-btn {
+      background: #A78BFA;
+      color: #111;
+      padding: 0 25px;
+      border-radius: 10px;
+    }
+
+    .examples {
+      margin-top: 35px;
+    }
+
+    .examples h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .ex-card {
+      background: #1A1A2E;
+      border: 1px solid #30304a;
+      color: white;
+      padding: 18px;
+      border-radius: 10px;
+      text-align: left;
+      line-height: 1.5;
+    }
+
+    .ex-card:hover {
+      border-color: #A78BFA;
+    }
+
+    .ex-card span {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    #status {
+      text-align: center;
+      color: #6EE7B7;
+      font-size: 13px;
+      margin-top: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 15px;
+      margin-top: 45px;
+      border-top: 1px solid #30304a;
+      color: #9999ad;
+      line-height: 2;
+    }
+
+    footer a {
+      color: #A78BFA;
+      text-decoration: none;
+      margin: 0 7px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 15px 5%;
+      }
+
+      .logo {
+        font-size: 19px;
+      }
+
+      .container {
+        margin: 35px auto;
+      }
+
+      .hero h1 {
+        font-size: 26px;
+      }
+
+      .example-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .input-area {
+        gap: 7px;
+      }
+
+      .input-area input {
+        padding: 12px;
+      }
+
+      .send-btn {
+        padding: 0 16px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-<div class="logo">🤖 VICKY <span>AI</span></div>
-<button class="nav-btn" onclick="clearChat()">New Chat +</button>
-</header>
-<div class="hero">
-<h1>Hi, I'm <span>Vicky AI</span><br>Ask Me Anything</h1>
-<p>I fit answer ANY question - homework, business, cooking, CV, science, maths, health, coding, love, anything. Type am below.</p>
-</div>
-<div class="tools">
-<button class="tool-btn active" onclick="setTool('General',this)">💬 General</button>
-<button class="tool-btn" onclick="setTool('Homework',this)">📚 Homework</button>
-<button class="tool-btn" onclick="setTool('Business',this)">💰 Business</button>
-<button class="tool-btn" onclick="setTool('Cooking',this)">🍲 Cooking</button>
-<button class="tool-btn" onclick="setTool('Coding',this)">💻 Coding</button>
-<button class="tool-btn" onclick="setTool('Life Advice',this)">❤️ Life</button>
-</div>
-<div class="chat-box">
-<div class="messages" id="messages">
-<div class="msg ai">👋 Hello boss! I'm Vicky AI. Ask me ANYTHING and I go answer you - homework, business ideas, Jollof recipe, CV, maths, science, coding, anything. Try me now!</div>
-</div>
-<div class="input-row">
-<input type="text" id="userInput" placeholder="Ask Vicky AI anything..." autocomplete="off" onkeypress="if(event.key==='Enter')sendMessage()">
-<button onclick="sendMessage()">Send ➤</button>
-</div>
-</div>
-<div class="examples">
-<h3>🔥 Try These - Click Am:</h3>
-<div class="ex-grid">
-<div class="ex-card" onclick="quickAsk('Give me business idea with 50k in Nigeria')"><b>💰 Business:</b><br>Give me business idea with 50k in Nigeria</div>
-<div class="ex-card" onclick="quickAsk('Explain photosynthesis in simple way for exam')"><b>📚 Homework:</b><br>Explain photosynthesis simply</div>
-<div class="ex-card" onclick="quickAsk('How to make Nigerian Jollof Rice step by step')"><b>🍲 Cooking:</b><br>How to make Jollof Rice?</div>
-<div class="ex-card" onclick="quickAsk('Write a CV for a shop assistant job in Lagos')"><b>📄 CV:</b><br>Write CV for shop assistant</div>
-<div class="ex-card" onclick="quickAsk('Solve 2x + 8 = 20 and explain step by step')"><b>🧮 Maths:</b><br>Solve 2x + 8 = 20</div>
-<div class="ex-card" onclick="quickAsk('Write HTML code for a login page')"><b>💻 Coding:</b><br>Write HTML code for login page</div>
-</div>
-</div>
-<footer>
-<p><b>Vicky AI</b> - Made with ❤️ in Lagos by Victory Bites</p>
-<div class="socials">
-<a href="https://instagram.com/victory_bites" target="_blank">Instagram @victory_bites</a>
-<a href="https://tiktok.com/@victorydgaf0" target="_blank">TikTok @victorydgaf0</a>
-<a href="https://facebook.com/victorybites" target="_blank">Facebook Victory Bites</a>
-<a href="https://x.com/victory_bites" target="_blank">X @victory_bites</a>
-</div>
-<p style="margin-top:12px;">© 2026 Vicky AI. All rights reserved.</p>
-</footer>
-<script>
-let currentTool="General";
-let history=[];
-function setTool(t,btn){currentTool=t;document.querySelectorAll('.tool-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');addMessage("ai","Okay boss, I don switch to "+t+" mode. Ask me anything about "+t+" now.")}
-function quickAsk(t){document.getElementById('userInput').value=t;sendMessage()}
-function clearChat(){document.getElementById('messages').innerHTML='<div class="msg ai">New chat started boss! 👋 What you want Vicky AI to help you solve today?</div>';history=[]}
-function addMessage(type,text){let box=document.getElementById('messages');let div=document.createElement('div');div.className="msg "+type;div.textContent=text;box.appendChild(div);box.scrollTop=box.scrollHeight;return div}
-async function sendMessage(){let input=document.getElementById('userInput');let text=input.value.trim();if(!text)return;addMessage("user",text);input.value="";let typing=addMessage("ai","Vicky AI dey think... 🤔");try{let reply=await askVicky(text);typing.remove();addMessage("ai",reply)}catch(e){typing.remove();addMessage("ai",smartFallback(text))}}
-async function askVicky(q){
-let system="You are Vicky AI, a friendly smart assistant from Lagos, Nigeria. Answer clearly, simply, step by step. Use Nigerian friendly tone but correct English. Be helpful for homework, business, cooking, CV, coding, maths, science, life advice. Give examples. Keep answers useful and not too long. If user asks in Pidgin, answer in Pidgin + English.";
-let prompt=system+"\n\nUser mode: "+currentTool+"\nUser question: "+q+"\n\nAnswer:";
-try{
-let res=await fetch("https://text.pollinations.ai/"+encodeURIComponent(prompt),{headers:{"Content-Type":"text/plain"}});
-if(!res.ok) throw new Error("api fail");
-let data=await http://res.text();
-if(data && http://data.length>10) return http://data.trim();
-throw new Error("empty");
-}catch(err){
-return smartFallback(q);
-}
-}
-function smartFallback(q){
-let l=q.toLowerCase();
-if(l.includes("business")||l.includes("50k")||l.includes("money")) return "💰 BUSINESS IDEA:\n\n1. Data/Airtime Reselling - Start with 20k, sell data daily\n2. Small Chops / Snacks - Puff puff, meat pie, sell for school/office\n3. Thrift Clothes - Buy small bale, sell on Instagram @victory_bites\n4. Food Business - Jollof, Ofada, sell for lunch time\n\nPLAN: Use 30k for goods, 10k for advert on TikTok/WhatsApp, 10k keep for emergency. Post everyday. Consistency na key. Tell me your exact budget and I go give you exact plan.";
-if(l.includes("jollof")||l.includes("cook")||l.includes("recipe")) return "🍲 JOLLOF RICE - STEP BY STEP:\n\n1. Blend tomatoes, pepper, onion, garlic\n2. Fry for oil 10 mins until e thick\n3. Add curry, thyme, seasoning, bay leaf\n4. Add washed rice + water, cover low heat 25 mins\n5. Add chicken + plantain for top\n6. Leave 5 mins make e smoke - Party Jollof don ready!\n\nSecret: No open pot too much, na smoke dey give taste.";
-if(l.includes("cv")||l.includes("resume")) return "📄 YOUR CV - COPY THIS:\n\nVICTORY - Shop Assistant\nLagos, Nigeria | victory_bites@gmail.com\n\nABOUT ME: Hardworking, honest and fast learner. I sabi talk to customers and handle money well.\n\nSKILLS: Customer Service, WhatsApp Marketing, Cash Handling, Social Media\n\nEXPERIENCE: Sales Assistant - Helped increase sales by talking to customers on WhatsApp & Instagram\n\nTell me the exact job name, I go rewrite am for that job.";
-if(l.includes("photosynthesis")) return "📚 PHOTOSYNTHESIS - SIMPLE FOR EXAM:\n\nPhotosynthesis na how plant take make their own food using sunlight.\n\nFORMULA: Sunlight + Water + Carbon Dioxide = Glucose (food) + Oxygen\n\nWHERE: For leaf, inside chloroplast\n\nWHY E IMPORTANT: Na why we dey breathe oxygen. If no photosynthesis, no life.";
-if(l.includes("2x")||l.includes("solve")||l.includes("maths")||l.includes("math")) return "🧮 MATHS HELP:\n\nTo solve equation, do same thing for both sides.\n\nExample: 2x + 8 = 20\nStep 1: Minus 8 for both sides -> 2x = 12\nStep 2: Divide by 2 -> x = 6\n\nTell me your exact maths question, I go solve am step by step for you.";
-if(l.includes("birthday")) return "🎉 BIRTHDAY MESSAGE:\n\nHappy Birthday my person! 🎂 Thank you for always being there for me. I pray this year bring you money, happiness and all your dreams come true. More life, more blessings. Love you always! ❤️\n\nTell me their name, I go add am.";
-if(l.includes("hello")||l==="hi"||l.includes("good morning")) return "Hello boss! 👋 How you dey? I be Vicky AI, I dey here to help you. Ask me anything - homework, business, cooking, CV, coding, maths. Wetin you want solve today?";
-if(l.includes("who are you")||l.includes("your name")) return "I be Vicky AI 🤖 - Your smart assistant from Lagos. I be created by Victory Bites to help people solve real life problems for free. Ask me anything!";
-if(l.includes("love")||l.includes("crush")||l.includes("boyfriend")||l.includes("girlfriend")) return "❤️ LIFE ADVICE:\n\nFor love matter, be yourself, no pretend. Talk true, respect the person, and no rush. If person like you, e go show for action, no be only word. Focus on your goals first, love go come. Your peace of mind pass anything. Tell me wetin happen, I go advise you.";
-if(l.includes("code")||l.includes("html")||l.includes("website")||l.includes("python")) return "💻 CODING HELP:\n\nTell me exactly wetin you want build - login page, portfolio, calculator, restaurant website? And which language - HTML, Python, JavaScript?\n\nExample: 'Write HTML for login page' - I go give you full code wey you fit copy and paste.\n\nWhat code you want make I write for you now?";
-return "🤖 VICKY AI ANSWER FOR: "+q+"\n\nHere na my advice:\n\n1. Break the problem into small small steps\n2. Write wetin you want achieve\n3. Find one person wey don do am before\n4. Start today, no wait tomorrow\n\nTell me more details - your budget, your class, or wetin you want cook/build - I go give you better exact answer. Try ask again with more details, or try one of the examples below.";
-}
-</script>
+
+  <header>
+    <div class="logo">🤖 USSY AI</div>
+    <button class="new-chat" id="newChatBtn">＋ New Chat</button>
+  </header>
+
+  <main class="container">
+
+    <section class="hero">
+      <h1>Hi, I'm <span>Ussy AI</span> 👋</h1>
+      <p>Ask me anything. I'm here to help you learn, create and grow.</p>
+      <p>Anything wey dey your mind, bring am come! 🚀</p>
+    </section>
+
+    <section class="tools">
+      <button class="tool-btn active" data-tool="General">🌍 General</button>
+      <button class="tool-btn" data-tool="Homework">📚 Homework</button>
+      <button class="tool-btn" data-tool="Business">💼 Business</button>
+      <button class="tool-btn" data-tool="Cooking">🍳 Cooking</button>
+      <button class="tool-btn" data-tool="Coding">💻 Coding</button>
+      <button class="tool-btn" data-tool="Life Advice">❤️ Life Advice</button>
+    </section>
+
+    <section class="chat-box" id="chatBox" aria-live="polite">
+      <div class="message">
+        <strong>🤖 Ussy AI</strong>
+        <p>Welcome! I'm Ussy AI. Ask me a question and let's figure it out together. 😊</p>
+      </div>
+    </section>
+
+    <div class="input-area">
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Ask Ussy AI anything..."
+        autocomplete="off"
+      >
+      <button class="send-btn" id="sendBtn">Send ➤</button>
+    </div>
+
+    <p id="status">✅ Ussy AI is ready. Type below and press Send!</p>
+
+    <section class="examples">
+      <h2>✨ Try asking me something</h2>
+
+      <div class="example-grid">
+
+        <button class="ex-card" data-prompt="Give me a profitable business idea I can start with 50,000 naira.">
+          <span>💰</span>
+          Business idea with ₦50k
+        </button>
+
+        <button class="ex-card" data-prompt="Explain photosynthesis in simple English.">
+          <span>🌱</span>
+          Explain photosynthesis
+        </button>
+
+        <button class="ex-card" data-prompt="Teach me how to prepare delicious Nigerian jollof rice.">
+          <span>🍚</span>
+          How to cook Jollof rice
+        </button>
+
+        <button class="ex-card" data-prompt="Help me write a professional CV as a beginner.">
+          <span>📄</span>
+          Create a professional CV
+        </button>
+
+        <button class="ex-card" data-prompt="Explain basic mathematics with examples.">
+          <span>🧮</span>
+          Learn mathematics
+        </button>
+
+        <button class="ex-card" data-prompt="Teach me how to create a login page using HTML and CSS.">
+          <span>💻</span>
+          Build a login page
+        </button>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Connect with us</p>
+    <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+    <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+
+    <p>Made with ❤️ in Lagos by Victory Bites</p>
+    <p>© 2026 Ussy AI. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const chatBox = document.getElementById("chatBox");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const newChatBtn = document.getElementById("newChatBtn");
+    const status = document.getElementById("status");
+    const toolButtons = document.querySelectorAll(".tool-btn");
+    const exampleCards = document.querySelectorAll(".ex-card");
+
+    let currentTool = "General";
+
+    // Add a message to the chat
+    function addMessage(type, text) {
+      const message = document.createElement("div");
+      message.className = "message " + type;
+
+      const name = document.createElement("strong");
+      name.textContent = type === "user" ? "You" : "🤖 Ussy AI";
+
+      const paragraph = document.createElement("p");
+      paragraph.textContent = text;
+
+      message.appendChild(name);
+      message.appendChild(paragraph);
+
+      chatBox.appendChild(message);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Generate a demo response
+    function getReply(question) {
+      const q = question.toLowerCase();
+
+      if (q.includes("business") || q.includes("50k") || q.includes("business idea")) {
+        return "Here is an idea! You can start a small online food or accessories business with ₦50,000. Start with a small selection of products, advertise on WhatsApp and Instagram, take clear pictures and reinvest your profit. Start small and grow gradually. 💰";
+      }
+
+      if (q.includes("jollof") || q.includes("cook") || q.includes("food")) {
+        return "To prepare Nigerian jollof rice, you need rice, tomatoes, pepper, onions, vegetable oil, seasoning, salt and stock. Blend your tomatoes and peppers, fry with onions, add seasoning and stock, then add washed rice. Cover and cook until soft. Enjoy! 🍚";
+      }
+
+      if (q.includes("cv") || q.includes("resume")) {
+        return "A professional CV should contain your full name, contact details, personal profile, education, skills, work experience and achievements. As a beginner, focus on your education, projects, volunteering and skills. Keep it clear and professional. 📄";
+      }
+
+      if (q.includes("photosynthesis")) {
+        return "Photosynthesis is the process by which green plants make their own food using sunlight, water and carbon dioxide. They produce glucose (food) and release oxygen. Think of it as a plant's way of preparing its own meal! 🌱";
+      }
+
+      if (q.includes("math") || q.includes("calculate") || q.includes("percentage")) {
+        return "Let's solve mathematics step by step! First, identify what the question is asking. Then choose the correct formula, substitute the values and calculate carefully. Send me the exact question and I'll walk you through it. 🧮";
+      }
+
+      if (q.includes("birthday")) {
+        return "Happy birthday! 🎉 May your new year bring you happiness, success, good health and beautiful opportunities. Keep growing and becoming a better version of yourself!";
+      }
+
+      if (q.includes("hello") || q.includes("hi") || q.includes("hey") || q.includes("how are you")) {
+        return "Hello there! 😃 I'm doing great. How can I help you today?";
+      }
+
+      if (q.includes("love") || q.includes("relationship") || q.includes("girlfriend") || q.includes("boyfriend")) {
+        return "Good relationships require honesty, communication, respect and effort from both people. Be yourself, communicate clearly and never forget that your happiness matters too. ❤️";
+      }
+
+      if (q.includes("html") || q.includes("css") || q.includes("javascript") || q.includes("coding") || q.includes("website")) {
+        return "That's exciting! 💻 HTML gives a webpage its structure, CSS makes it beautiful, and JavaScript makes it interactive. Tell me what you want to build and we can break it down step by step.";
+      }
+
+      if (q.includes("save") || q.includes("saving") || q.includes("money")) {
+        return "A good way to save money is to set a realistic target, record your expenses and save a fixed amount whenever you receive money. Try to save before spending, even if the amount is small. 💰";
+      }
+
+      // Responses based on selected mode
+      if (currentTool === "Homework") {
+        return "Let's work through your homework together! Send the full question and I'll explain the answer step by step. 📚";
+      }
+
+      if (currentTool === "Business") {
+        return "Let's think like entrepreneurs! Tell me your budget, your business interests and your target customers so we can develop a practical business idea. 💼";
+      }
+
+      if (currentTool === "Cooking") {
+        return "Let's get cooking! Tell me the meal you want to prepare and I'll help with the ingredients and cooking steps. 🍳";
+      }
+
+      if (currentTool === "Coding") {
+        return "Let's build something! Tell me whether you're working with HTML, CSS or JavaScript, and I'll help you understand the code. 💻";
+      }
+
+      if (currentTool === "Life Advice") {
+        return "I'm listening. Tell me what's going on, and let's think through it calmly. ❤️";
+      }
+
+      return "That's an interesting question! 😊 I can help with learning, business ideas, cooking, coding and everyday questions. Try asking me something specific so I can give you a more useful answer.";
+    }
+
+    // Send a message
+    function sendMessage() {
+      const question = userInput.value.trim();
+
+      if (question === "") {
+        status.textContent = "⚠️ Please type a message first.";
+        userInput.focus();
+        return;
+      }
+
+      addMessage("user", question);
+
+      userInput.value = "";
+      status.textContent = "🤖 Ussy AI is thinking...";
+
+      sendBtn.disabled = true;
+
+      setTimeout(function () {
+        const reply = getReply(question);
+        addMessage("ai", reply);
+
+        status.textContent = "✅ Ussy AI is ready!";
+        sendBtn.disabled = false;
+        userInput.focus();
+      }, 500);
+    }
+
+    // Send button
+    sendBtn.addEventListener("click", sendMessage);
+
+    // Press Enter to send
+    userInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    });
+
+    // Switch between modes
+    toolButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        toolButtons.forEach(function (btn) {
+          btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+        currentTool = button.dataset.tool;
+
+        addMessage("ai", "You've selected " + currentTool + " mode. What would you like help with?");
+      });
+    });
+
+    // Example prompt buttons
+    exampleCards.forEach(function (card) {
+      card.addEventListener("click", function () {
+        userInput.value = card.dataset.prompt;
+        sendMessage();
+      });
+    });
+
+    // Start a new chat
+    newChatBtn.addEventListener("click", function () {
+      chatBox.innerHTML = "";
+
+      addMessage("ai", "Welcome to a new chat! 😊 What would you like to talk about?");
+
+      userInput.value = "";
+      currentTool = "General";
+
+      toolButtons.forEach(function (button) {
+        button.classList.remove("active");
+
+        if (button.dataset.tool === "General") {
+          button.classList.add("active");
+        }
+      });
+
+      status.textContent = "✅ New chat started!";
+      userInput.focus();
+    });
+
+  </script>
+
 </body>
 </html>
